@@ -1,0 +1,28 @@
+---
+
+- name:
+  yum:
+    name: podman
+    state: present
+
+- name: create mirror dir
+  file:
+    path: "{{ archive_root }}/images/"
+    state: absent
+  when: clear_image_cache == 'True'
+
+- name: create mirror dir
+  file:
+    path: "{{ archive_root }}/images/"
+    state: directory
+
+- name: pull all podaman
+  command: "podman pull {{ item }}"
+  with_items:
+    - "{{ images_to_archive }}"
+
+- name: archive with podman
+  command: "podman save --format {{ save_format }} -o {{ archive_root }}/images/{{ item|replace(':','_')|replace('/','_') }}.tar {{ item }}"
+  with_items:
+    - "{{ images_to_archive }}"
+

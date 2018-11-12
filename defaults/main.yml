@@ -1,0 +1,6 @@
+---
+# defaults file for ./
+
+
+clear_image_cache: True
+save_format: 'oci_archive'
