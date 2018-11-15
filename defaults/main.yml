@@ -3,4 +3,4 @@
 
 
 clear_image_cache: True
-save_format: 'oci_archive'
+save_format: 'oci-archive'
